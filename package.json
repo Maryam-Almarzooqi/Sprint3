@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Please Work\""
+    "test": "echo \"Please Work\"" 
+    "start":"node server.js"
   },
   "keywords": [],
   "author": "",
