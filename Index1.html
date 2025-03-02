@@ -1,43 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-<style>
-  body {
-    background-color: #91c9cb; 
-    font-family: Arial, sans-serif;
-    text-align: center;
-    padding: 50px;
-    color: #ffffff;
-  }
-
-  button {
-    background-color: #ffffff;
-    color: #029ea4;
-    border: 2px solid #029ea4;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: all 0.3s ease;
-  }
-
-  button:hover {
-    background-color: #9fd1d3;
-    color: #ffffff;
-  }
-</style>
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dice Roller API</title>
-    <script>
+    <link rel="stylesheet" href="styles.css"> <!-- Ensure the correct CSS file name/path -->
 
-        //linking the azure web app
-        const API_BASE_URL = "https://rolladice-auf0hhe6gmb5hvb3.uaenorth-01.azurewebsites.net/";
+    <script>
+        // Linking the Azure Web App API
+        const API_BASE_URL = "https://rolladice-auf0hhe6gmb5hvb3.uaenorth-01.azurewebsites.net";
 
         async function rollDice() {
             try {
-                const response = await fetch(${API_BASE_URL}/roll, {
+                const response = await fetch(`${API_BASE_URL}/roll`, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
@@ -46,17 +21,17 @@
 
                 if (response.ok) {
                     const data = await response.json();
-                    document.getElementById("result").textContent = You rolled a ${data.roll} on a 6-sided die!;
+                    document.getElementById("result").textContent = `You rolled a ${data.roll} on a 6-sided die!`;
                 } else {
-                    document.getElementById("result").textContent = Error: Server responded with ${response.status};
+                    document.getElementById("result").textContent = `Error: Server responded with ${response.status}`;
                 }
             } catch (error) {
-                document.getElementById("result").textContent = Error: Unable to connect to the API.;
+                document.getElementById("result").textContent = `Error: Unable to connect to the API.`;
             }
         }
 
         function displayAPIInfo() {
-            document.getElementById("api-info").textContent = Using API: ${API_BASE_URL}/roll;
+            document.getElementById("api-info").textContent = `Using API: ${API_BASE_URL}/roll`;
         }
 
         window.onload = displayAPIInfo;
