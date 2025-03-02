@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dice Roller API</title>
+    <script>
+        
+        const API_BASE_URL = "https://rolladice-auf0hhe6gmb5hvb3.uaenorth-01.azurewebsites.net/";
+
+        async function rollDice() {
+            try {
+                const response = await fetch(`${API_BASE_URL}/roll`, {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    document.getElementById("result").textContent = `You rolled a ${data.roll} on a 6-sided die!`;
+                } else {
+                    document.getElementById("result").textContent = `Error: Server responded with ${response.status}`;
+                }
+            } catch (error) {
+                document.getElementById("result").textContent = `Error: Unable to connect to the API.`;
+            }
+        }
+
+        function displayAPIInfo() {
+            document.getElementById("api-info").textContent = `Using API: ${API_BASE_URL}/roll`;
+        }
+
+        window.onload = displayAPIInfo;
+    </script>
+</head>
+<body>
+    <h1>Dice Roller API</h1>
+    <button onclick="rollDice()">Roll 1 Six-Sided Die</button>
+    <p id="result"></p>
+    <p id="api-info"></p> 
+</body>
+</html>
